@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "35194826737",
+    "project_id": "alertblo-68682",
+    "storage_bucket": "alertblo-68682.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35194826737:android:482d7dead48c6d30b35e50",
+        "android_client_info": {
+          "package_name": "com.example.alertblo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz_f5EOrdoNeqZHSNuovGn1Ee9F3eExD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
