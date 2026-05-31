@@ -1,16 +1,23 @@
 package com.example.alertblo;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.PackageManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.tabs.TabLayout;
@@ -48,15 +55,40 @@ public class MainActivity extends AppCompatActivity {
 
         // Verificar que alerta no está vacía y su contenido no es nulo
         if(alerta != null && !alerta.isEmpty()){
-            mostrarNotificacioAlerta(alerta);
+            mostrarNotificacioAlerta(contexto, alerta);
         }
     }
 
     // Mostra una notificació amb el text de l'alerta rebuda, i sona encara que el mòbil estigui en silenci.
-    private static void mostrarNotificacioAlerta(String textAlerta) {
+    private static void mostrarNotificacioAlerta(Context contexto, String textAlerta) {
 
-        Uri ruta = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +  "://" + contexto.getPackageName() + "/raw/sonidoalarma");
-        NotificationManager nm = (NotificationManager) contexto.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder creadorNotificacion = new NotificationCompat.Builder(contexto, "canal_alerta")
+                .setSmallIcon(R.drawable.notificationicon)
+                .setContentTitle("¡ALERTA MUNICIPAL!")
+                .setContentText(textAlerta)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(textAlerta))
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setCategory(NotificationCompat.CATEGORY_ALARM)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificador = NotificationManagerCompat.from(contexto);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if(ContextCompat.checkSelfPermission(contexto, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED){
+
+                notificador.notify(1001, creadorNotificacion.build());
+
+            } else {
+                ActivityCompat.requestPermissions((Activity) contexto, new String[]{
+                        Manifest.permission.POST_NOTIFICATIONS},
+                        101
+                );
+            }
+
+        } else {
+            notificador.notify(1001, creadorNotificacion.build());
+        }
+
 
     }
 

@@ -2,8 +2,12 @@ package com.example.alertblo;
 
 import android.Manifest;
 import android.app.*;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.AudioAttributes;
+import android.net.Uri;
 import android.os.*;
 
 import androidx.core.app.ActivityCompat;
@@ -11,7 +15,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 public class AlertaService extends Service {
-
     private static final String CANAL_SERVEI   = "canal_servei";   // Canal per a la notificació persistent del servei
     private static final String CANAL_ALERTA   = "canal_alerta";   // Canal per a les alertes rebudes
     private static final int    INTERVAL_MS    = 20_000;           // Comprova cada 20 segons
@@ -65,6 +68,12 @@ public class AlertaService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManager nm = getSystemService(NotificationManager.class);
 
+            Uri rutaSonido = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +  "://" + getPackageName() + "/raw/sonidoalarma");
+            AudioAttributes atributosSonido = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ALARM)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+
             // Canal silenciós per a la notificació del servei
             nm.createNotificationChannel(new NotificationChannel(
                     CANAL_SERVEI, "Servei en segon pla",
@@ -74,6 +83,7 @@ public class AlertaService extends Service {
             NotificationChannel canalAlerta = new NotificationChannel(
                     CANAL_ALERTA, "Alertes municipals",
                     NotificationManager.IMPORTANCE_HIGH);
+            canalAlerta.setSound(rutaSonido, atributosSonido);
             canalAlerta.setBypassDnd(true);               // Ignora el mode No Molestar
             canalAlerta.enableVibration(true);
             nm.createNotificationChannel(canalAlerta);
