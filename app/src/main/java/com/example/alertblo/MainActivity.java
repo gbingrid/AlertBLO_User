@@ -2,13 +2,9 @@ package com.example.alertblo;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.NotificationManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.AudioAttributes;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -17,7 +13,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.PackageManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.tabs.TabLayout;
@@ -54,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         String alerta = Servidor.getAlerta(MainActivity.ID_DISPOSITIU);
 
         // Verificar que alerta no está vacía y su contenido no es nulo
-        if(alerta != null && !alerta.isEmpty()){
+        if(alerta != null && alerta.length() > 0){
             mostrarNotificacioAlerta(contexto, alerta);
         }
     }
@@ -91,16 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-    // Crea una nova alerta al servidor SOLO PARA APP POLICIA
-    /*
-    private void crearAlerta() {
-        // TODO
-        String textAlerta = ""; // TODO
-
-        // Cridar al servidor per crear l'alerta
-        Servidor.crearAlerta(ID_DISPOSITIU, textAlerta);
-    }*/
 
 
     // Funció que prepara l'app: obté l'ID del dispositiu, demana permisos i arranca el servei en segon pla.

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="24dp" >
 
     <TextView
         android:id="@+id/txtAppName"
@@ -23,7 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="37dp"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:background="#0A1128" >
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

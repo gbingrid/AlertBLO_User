@@ -29,7 +29,7 @@ public class Servidor {
         try {
             String body = "ID_DISPOSITIU=" + URLEncoder.encode(idDispositiu, "UTF-8")
                     + "&TEXT_ALERTA="  + URLEncoder.encode(textAlerta,   "UTF-8");
-            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/crear_alerta.php", "POST");
+            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/create_alerta.php", "POST");
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.getOutputStream().write(body.getBytes("UTF-8"));
