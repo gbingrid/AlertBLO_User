@@ -13,9 +13,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,25 +27,29 @@ public class MainActivity extends AppCompatActivity {
     public static final String IP_SERVIDOR = "http://13.63.226.223"; // IP del servidor
 
     private static Context contexto;
-    private RecyclerView alertasActivas;
+    private static Adaptador adaptador;
+    private static RecyclerView alertasActivas;
     private TabLayout filtrosAlertas;
-    private Chip todas, alertaRoja, alertaNaranja, alertaAmarilla;
+    private Chip todas, critica, aviso;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        PrepararApp();
 
-        // Enlazar cada variable con su componente del XML
         alertasActivas = findViewById(R.id.recyclerViewAlertas);
+        alertasActivas.setLayoutManager(new LinearLayoutManager(this));
+
+        adaptador = new Adaptador();
+        alertasActivas.setAdapter(adaptador);
+
         filtrosAlertas = findViewById(R.id.tabLayoutAlertas);
         contexto = getApplicationContext();
         todas = findViewById(R.id.chipTodas);
-        alertaRoja = findViewById(R.id.chipAlertaRoja);
-        alertaNaranja = findViewById(R.id.chipAlertaNaranja);
-        alertaAmarilla = findViewById(R.id.chipAlertaAmarilla);
+        critica = findViewById(R.id.chipAlertaCritica);
+        aviso = findViewById(R.id.chipAlertaNormal);
+        PrepararApp();
     }
 
     // Consulta al servidor si hi ha una alerta nova per a aquest dispositiu.
@@ -49,22 +57,45 @@ public class MainActivity extends AppCompatActivity {
         String alerta = Servidor.getAlerta(MainActivity.ID_DISPOSITIU);
 
         // Verificar que alerta no está vacía y su contenido no es nulo
-        if(alerta != null && alerta.length() > 0){
-            mostrarNotificacioAlerta(contexto, alerta);
+        if(alerta != null){
+            Alerta objetoAlerta = Alerta.parsearAlerta(alerta);
+
+            if(objetoAlerta != null && !objetoAlerta.getDescripcion().isEmpty()){
+
+                new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
+                    adaptador.addAlerta(objetoAlerta);
+
+                    alertasActivas.smoothScrollToPosition(0);
+
+                    if(objetoAlerta.getSilencio() == 0){ // Es Alerta crítica
+                        mostrarNotificacioAlerta(contexto, objetoAlerta.getDescripcion(), "canal_alerta");
+                    } else {
+                        mostrarNotificacioAlerta(contexto, objetoAlerta.getDescripcion(), "canal_aviso");
+
+                    }
+                });
+
+
+            }
+
         }
     }
 
     // Mostra una notificació amb el text de l'alerta rebuda, i sona encara que el mòbil estigui en silenci.
-    private static void mostrarNotificacioAlerta(Context contexto, String textAlerta) {
+    private static void mostrarNotificacioAlerta(Context contexto, String textAlerta, String canal) {
 
-        NotificationCompat.Builder creadorNotificacion = new NotificationCompat.Builder(contexto, "canal_alerta")
+        NotificationCompat.Builder creadorNotificacion = new NotificationCompat.Builder(contexto, canal)
                 .setSmallIcon(R.drawable.notificationicon)
-                .setContentTitle("¡ALERTA MUNICIPAL!")
+                .setContentTitle(canal.equals("canal_alerta") ? "¡ALERTA MUNICIPAL!" : "AVISO MUNICIPAL")
                 .setContentText(textAlerta)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(textAlerta))
-                .setPriority(NotificationCompat.PRIORITY_MAX)
-                .setCategory(NotificationCompat.CATEGORY_ALARM)
                 .setAutoCancel(true);
+
+        if("canal_alerta".equals(canal)){
+            creadorNotificacion.setPriority(NotificationCompat.PRIORITY_MAX).setCategory(NotificationCompat.CATEGORY_ALARM);
+        } else {
+            creadorNotificacion.setPriority(NotificationCompat.PRIORITY_LOW);
+        }
 
         NotificationManagerCompat notificador = NotificationManagerCompat.from(contexto);
 

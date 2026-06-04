@@ -21,7 +21,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayoutAlertas"
         android:layout_width="match_parent"
-        android:layout_height="37dp"
+        android:layout_height="48dp"
         android:clickable="true"
         android:focusable="true"
         android:background="#0A1128" >
@@ -29,12 +29,12 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_alertasactivas" />
+            android:text="@string/txt_alertasrecientes" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_historialalertas" />
+            android:text="@string/txt_historial_alertas" />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -53,22 +53,16 @@
                 android:text="@string/txt_todas" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipAlertaRoja"
+                android:id="@+id/chipAlertaCritica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_alertaroja" />
+                android:text="@string/txt_critica"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipAlertaNaranja"
+                android:id="@+id/chipAlertaNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_alertanaranja" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipAlertaAmarilla"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_alertaamarilla" />
+                android:text="@string/txt_aviso" />
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>

@@ -14,7 +14,7 @@ public class Servidor {
     public static String getAlerta(String idDispositiu) {
         try {
             String enc = URLEncoder.encode(idDispositiu, "UTF-8");
-            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/get_alerta.php?id=" + enc, "GET");
+            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/get_alerta_json.php?id=" + enc, "GET");
             String resp = llegir(conn);
             conn.disconnect();
             return (resp != null && !resp.isEmpty()) ? resp : null;
@@ -25,11 +25,12 @@ public class Servidor {
 
     // Envia una nova alerta al servidor.
     // Retorna true si s'ha creat correctament.
-    public static boolean crearAlerta(String idDispositiu, String textAlerta) {
+    public static boolean crearAlerta(String idDispositiu, String textAlerta, int silencio) {
         try {
             String body = "ID_DISPOSITIU=" + URLEncoder.encode(idDispositiu, "UTF-8")
-                    + "&TEXT_ALERTA="  + URLEncoder.encode(textAlerta,   "UTF-8");
-            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/create_alerta.php", "POST");
+                    + "&TEXT_ALERTA="  + URLEncoder.encode(textAlerta,   "UTF-8")
+                    + "&SILENCIO=" + silencio;
+            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/crear_alerta_silencio.php", "POST");
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.getOutputStream().write(body.getBytes("UTF-8"));
