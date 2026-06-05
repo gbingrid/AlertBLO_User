@@ -8,13 +8,12 @@ import java.net.*;
 // Sempre s'han de cridar des d'un fil secundari (no des del fil de la UI).
 public class Servidor {
 
-
     // Consulta si hi ha una alerta nova per a aquest dispositiu.
     // Retorna el text de l'alerta, o null si no n'hi ha.
     public static String getAlerta(String idDispositiu) {
         try {
             String enc = URLEncoder.encode(idDispositiu, "UTF-8");
-            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/get_alerta.php?id=" + enc, "GET");
+            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/get_alerta_json.php?id=" + enc, "GET");
             String resp = llegir(conn);
             conn.disconnect();
             return (resp != null && !resp.isEmpty()) ? resp : null;
@@ -25,18 +24,21 @@ public class Servidor {
 
     // Envia una nova alerta al servidor.
     // Retorna true si s'ha creat correctament.
-    public static boolean crearAlerta(String idDispositiu, String textAlerta) {
+    public static boolean crearAlerta(String idDispositiu, String textAlerta, int silencio) {
         try {
             String body = "ID_DISPOSITIU=" + URLEncoder.encode(idDispositiu, "UTF-8")
-                    + "&TEXT_ALERTA="  + URLEncoder.encode(textAlerta,   "UTF-8");
-            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/create_alerta.php", "POST");
+                    + "&TEXT_ALERTA="  + URLEncoder.encode(textAlerta,   "UTF-8")
+                    + "&SILENCIO=" + silencio;
+            HttpURLConnection conn = obrir(MainActivity.IP_SERVIDOR + "/crear_alerta_silencio.php", "POST");
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.getOutputStream().write(body.getBytes("UTF-8"));
-            boolean ok = "OK".equals(llegir(conn));
+            //boolean ok = "OK".equals(llegir(conn));
+            boolean ok = llegir(conn).replace("'", "").trim().equals("OK");
             conn.disconnect();
             return ok;
         } catch (Exception e) {
+            android.util.Log.d("SERVIDOR", "ERROR: " + e.getClass().getName() + " - " + e.getMessage());
             return false;
         }
     }
