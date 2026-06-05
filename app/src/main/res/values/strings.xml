@@ -7,4 +7,7 @@
     <string name="txt_critica">Criticas</string>
     <string name="txt_aviso">Avisos</string>
     <string name="txt_historial_alertas">Historial</string>
+    <string name="txt_titulo">titulo</string>
+    <string name="txt_descripcion">descripcion</string>
+    <string name="txt_fechahora">fechahora</string>
 </resources>

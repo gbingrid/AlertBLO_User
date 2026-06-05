@@ -54,7 +54,6 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         }
     }
     static class ViewHolder extends RecyclerView.ViewHolder {
-        MaterialCardView tarjeta;
         ImageView icono;
         TextView titulo;
         TextView descripcion;
