@@ -52,9 +52,26 @@ public class Servidor {
 
     // Llig la primera línia de la resposta
     private static String llegir(HttpURLConnection conn) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String resp = br.readLine();
+        // Leer la respuesta del servidor en caso de que este arroje error
+        InputStream inputStream = (conn.getResponseCode() == HttpURLConnection.HTTP_OK)
+                ? conn.getInputStream()
+                : conn.getErrorStream();
+
+        if(inputStream == null){
+            return "";
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+
+        StringBuilder completo = new StringBuilder();
+        String linea;
+
+        while ((linea = br.readLine()) != null){
+            completo.append(linea).append("\n");
+        }
+
         br.close();
-        return resp;
+        //return resp;
+        return completo.toString().trim();
     }
 }

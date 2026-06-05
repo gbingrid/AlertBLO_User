@@ -2,9 +2,9 @@
     <string name="app_name">Alert BLO</string>
     <string name="txt_alert_blo">AlertBLO</string>
     <string name="txt_todas">Todas</string>
-    <string name="txt_alertaroja">Roja</string>
-    <string name="txt_alertanaranja">Naranja</string>
-    <string name="txt_alertaamarilla">Amarilla</string>
-    <string name="txt_alertasactivas">Activas</string>
     <string name="txt_historialalertas">Historial</string>
+    <string name="txt_alertas_recientes">Recientes</string>
+    <string name="txt_critica">Criticas</string>
+    <string name="txt_aviso">Avisos</string>
+    <string name="txt_historial_alertas">Historial</string>
 </resources>

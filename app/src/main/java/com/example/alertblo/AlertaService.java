@@ -14,22 +14,26 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class AlertaService extends Service {
     private static final String CANAL_SERVEI   = "canal_servei";   // Canal per a la notificació persistent del servei
     private static final String CANAL_ALERTA   = "canal_alerta";   // Canal per a les alertes rebudes
+    private static final String CANAL_AVISO = "canal_aviso";
     private static final int    INTERVAL_MS    = 20_000;           // Comprova cada 20 segons
     private static final int    NOTIF_SERVEI   = 1;
     private static final int    NOTIF_ALERTA   = 2;
-
+    public static ExecutorService netGetThread = Executors.newSingleThreadExecutor();
     private final Handler handler = new Handler(Looper.getMainLooper());
 
     // Runnable que s'executa cada INTERVAL_MS i comprova si hi ha alertes noves
     private final Runnable comprovador = new Runnable() {
         @Override
         public void run() {
-            new Thread(() -> {
+            netGetThread.submit(() -> {
                 MainActivity.GetAlerta();
-            }).start();
+            });
             // Tornar a programar la comprovació
             handler.postDelayed(this, INTERVAL_MS);
         }
@@ -41,7 +45,7 @@ public class AlertaService extends Service {
         crearCanals();
         // Notificació persistent obligatòria per als ForegroundService
         Notification notifServei = new NotificationCompat.Builder(this, CANAL_SERVEI)
-                .setContentTitle("Servei d'alertes actiu")
+                .setContentTitle("Servicio de alertas activo")
                 .setSmallIcon(android.R.drawable.ic_dialog_info)
                 .setPriority(NotificationCompat.PRIORITY_MIN)   // Mínima per no molestar
                 .build();
@@ -81,12 +85,19 @@ public class AlertaService extends Service {
 
             // Canal d'alta prioritat per a alertes (sona amb el mòbil en silenci)
             NotificationChannel canalAlerta = new NotificationChannel(
-                    CANAL_ALERTA, "Alertes municipals",
+                    CANAL_ALERTA, "¡ALERTA MUNICIPAL!",
                     NotificationManager.IMPORTANCE_HIGH);
             canalAlerta.setSound(rutaSonido, atributosSonido);
             canalAlerta.setBypassDnd(true);               // Ignora el mode No Molestar
             canalAlerta.enableVibration(true);
             nm.createNotificationChannel(canalAlerta);
+
+            // Canal de baja prioridad para avisos (no emite sonido)
+            NotificationChannel canalAviso = new NotificationChannel(
+                    CANAL_AVISO, "AVISO MUNICIPAL",
+                    NotificationManager.IMPORTANCE_LOW);
+            canalAviso.enableVibration(false);
+            nm.createNotificationChannel(canalAviso);
         }
     }
 
