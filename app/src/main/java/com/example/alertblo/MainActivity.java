@@ -1,7 +1,6 @@
 package com.example.alertblo;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,11 +14,11 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout filtrosAlertas;
     private Chip todas, critica, aviso;
 
+    private static GestorGeofence geofence;
+    private static final int LocRequestCode = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+        solicitarPermiso();
         PrepararApp();
     }
 
@@ -91,21 +93,23 @@ public class MainActivity extends AppCompatActivity {
 
                 new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
                     adaptador.addAlerta(objetoAlerta);
-
                     alertasActivas.smoothScrollToPosition(0);
-
-                    if(objetoAlerta.getSilencio() == 0){ // Es Alerta crítica
-                        mostrarNotificacioAlerta(contexto, objetoAlerta.getDescripcion(), "canal_alerta", objetoAlerta.getIdAlerta());
-                    } else {
-                        mostrarNotificacioAlerta(contexto, objetoAlerta.getDescripcion(), "canal_aviso", objetoAlerta.getIdAlerta());
-                    }
                 });
+
+                if(objetoAlerta.getSilencio() == 0){ // Es Alerta crítica
+                    if(geofence != null){
+                        geofence.comprobarNotificar(objetoAlerta);
+                    }
+                    //mostrarNotificacioAlerta(contexto, objetoAlerta.getDescripcion(), "canal_alerta", objetoAlerta.getIdAlerta());
+                } else {
+                    mostrarNotificacioAlerta(contexto, objetoAlerta.getDescripcion(), "canal_aviso", objetoAlerta.getIdAlerta());
+                }
             }
         }
     }
 
     // Mostra una notificació amb el text de l'alerta rebuda, i sona encara que el mòbil estigui en silenci.
-    private static void mostrarNotificacioAlerta(Context contexto, String textAlerta, String canal, int idAlerta) {
+    static void mostrarNotificacioAlerta(Context contexto, String textAlerta, String canal, int idAlerta) {
 
         NotificationCompat.Builder creadorNotificacion = new NotificationCompat.Builder(contexto, canal)
                 .setSmallIcon(R.drawable.notificationicon)
@@ -130,6 +134,27 @@ public class MainActivity extends AppCompatActivity {
             notificador.notify(idAlerta, creadorNotificacion.build());
         }
     }
+
+    //************BLOQUE DE FUNCIONES PARA GEOLOCALIZACIÓN
+
+    // Función que solicita permisos al usuario para geolocalización
+    private void solicitarPermiso(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LocRequestCode);
+        } else {
+            geofence = new GestorGeofence(getApplicationContext());
+        }
+    }
+
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == LocRequestCode && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            geofence = new GestorGeofence(getApplicationContext());
+        }
+    }
+
+    //************
 
     // Funció que prepara l'app: obté l'ID del dispositiu, demana permisos i arranca el servei en segon pla.
     private void PrepararApp() {
