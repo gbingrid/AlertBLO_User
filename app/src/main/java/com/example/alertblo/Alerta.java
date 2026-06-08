@@ -10,7 +10,7 @@ public class Alerta {
     public enum Tipo{CRITICA, NORMAL};
     private final int id_Alerta;
     private final String descripcion;
-    private final int silencio;
+    private int silencio = 0;
     private final String fecha_hora;
     private final long timestamp = System.currentTimeMillis();
 
@@ -49,8 +49,8 @@ public class Alerta {
 
     public String getTitulo(){
         return getTipo() == Tipo.CRITICA
-                ? "ALERTA CRÍTICA"
-                : "ALERTA";
+                ? "¡ALERTA CRÍTICA!"
+                : "AVISO MUNICIPAL";
     }
 
     public static Alerta parsearAlerta(String alerta){

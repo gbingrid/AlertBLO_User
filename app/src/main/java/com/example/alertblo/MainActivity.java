@@ -100,22 +100,26 @@ public class MainActivity extends AppCompatActivity {
                     if(geofence != null){
                         geofence.comprobarNotificar(objetoAlerta);
                     } else { // Si la ubicación no está disponible, se notifica como aviso
-                        MainActivity.mostrarNotificacioAlerta(contexto, objetoAlerta.getDescripcion(), "canal_aviso", objetoAlerta.getIdAlerta());
+                        MainActivity.mostrarNotificacioAlerta(contexto, objetoAlerta, "canal_aviso");
                     }
 
                 } else {
-                    mostrarNotificacioAlerta(contexto, objetoAlerta.getDescripcion(), "canal_aviso", objetoAlerta.getIdAlerta());
+                    mostrarNotificacioAlerta(contexto, objetoAlerta, "canal_aviso");
                 }
             }
         }
     }
 
     // Mostra una notificació amb el text de l'alerta rebuda, i sona encara que el mòbil estigui en silenci.
-    static void mostrarNotificacioAlerta(Context contexto, String textAlerta, String canal, int idAlerta) {
+    static void mostrarNotificacioAlerta(Context contexto, Alerta alerta, String canal) {
+
+        String tituloNotificacion = alerta.getTitulo();
+        String textAlerta = alerta.getDescripcion();
+        int idAlerta = alerta.getIdAlerta();
 
         NotificationCompat.Builder creadorNotificacion = new NotificationCompat.Builder(contexto, canal)
                 .setSmallIcon(R.drawable.notificationicon)
-                .setContentTitle(canal.equals("canal_alerta") ? "¡ALERTA MUNICIPAL!" : "AVISO MUNICIPAL")
+                .setContentTitle(tituloNotificacion)
                 .setContentText(textAlerta)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(textAlerta))
                 .setAutoCancel(true);

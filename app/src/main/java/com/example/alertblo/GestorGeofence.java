@@ -26,16 +26,16 @@ public class GestorGeofence {
 
         fusedClient.getLastLocation().addOnSuccessListener(location -> {
             if(location == null) { // Si no hay ubicación reciente, se notifica como aviso
-                MainActivity.mostrarNotificacioAlerta(contexto, alerta.getDescripcion(), "canal_aviso", alerta.getIdAlerta());
+                MainActivity.mostrarNotificacioAlerta(contexto, alerta, "canal_aviso");
                 return;
             }
 
             double distancia = calcularDistancia(location.getLatitude(), location.getLongitude(), GeoLat, GeoLon);
 
             if(distancia <= GeoRadio){
-                MainActivity.mostrarNotificacioAlerta(contexto, alerta.getDescripcion(), "canal_alerta", alerta.getIdAlerta());
+                MainActivity.mostrarNotificacioAlerta(contexto, alerta, "canal_alerta");
             } else {
-                MainActivity.mostrarNotificacioAlerta(contexto, alerta.getDescripcion(), "canal_aviso", alerta.getIdAlerta());
+                MainActivity.mostrarNotificacioAlerta(contexto, alerta, "canal_aviso");
             }
         });
     }

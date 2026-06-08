@@ -48,11 +48,6 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void mostrarTodas(){
-        for(Alerta a: todas){
-
-        }
-    }
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView icono;
         TextView titulo;
@@ -80,12 +75,11 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
 
         Alerta alerta = listaAlertas.get(position);
+        h.titulo.setText(alerta.getTitulo());
 
-        if (alerta.getSilencio() == 0) {
-            h.titulo.setText("¡ALERTA CRÍTICA!");
+        if (alerta.getTipo() == Alerta.Tipo.CRITICA) {
             h.icono.setImageResource(R.drawable.ic_alerta_critica);
         } else {
-            h.titulo.setText("AVISO MUNICIPAL");
             h.icono.setImageResource(android.R.drawable.ic_dialog_info);
         }
 

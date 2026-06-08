@@ -85,7 +85,7 @@ public class AlertaService extends Service {
 
             // Canal d'alta prioritat per a alertes (sona amb el mòbil en silenci)
             NotificationChannel canalAlerta = new NotificationChannel(
-                    CANAL_ALERTA, "¡ALERTA MUNICIPAL!",
+                    CANAL_ALERTA, "¡ALERTA CRÍTICA!",
                     NotificationManager.IMPORTANCE_HIGH);
             canalAlerta.setSound(rutaSonido, atributosSonido);
             canalAlerta.setBypassDnd(true);               // Ignora el mode No Molestar
