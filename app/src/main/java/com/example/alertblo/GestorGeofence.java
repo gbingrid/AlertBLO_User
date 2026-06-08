@@ -3,9 +3,7 @@ package com.example.alertblo;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-
 import androidx.core.content.ContextCompat;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -27,7 +25,11 @@ public class GestorGeofence {
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) return;
 
         fusedClient.getLastLocation().addOnSuccessListener(location -> {
-            if(location == null) return;
+            if(location == null) { // Si no hay ubicación reciente, se notifica como aviso
+                MainActivity.mostrarNotificacioAlerta(contexto, alerta.getDescripcion(), "canal_aviso", alerta.getIdAlerta());
+                return;
+            }
+
             double distancia = calcularDistancia(location.getLatitude(), location.getLongitude(), GeoLat, GeoLon);
 
             if(distancia <= GeoRadio){

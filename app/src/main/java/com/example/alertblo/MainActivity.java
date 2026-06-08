@@ -99,8 +99,10 @@ public class MainActivity extends AppCompatActivity {
                 if(objetoAlerta.getSilencio() == 0){ // Es Alerta crítica
                     if(geofence != null){
                         geofence.comprobarNotificar(objetoAlerta);
+                    } else { // Si la ubicación no está disponible, se notifica como aviso
+                        MainActivity.mostrarNotificacioAlerta(contexto, objetoAlerta.getDescripcion(), "canal_aviso", objetoAlerta.getIdAlerta());
                     }
-                    //mostrarNotificacioAlerta(contexto, objetoAlerta.getDescripcion(), "canal_alerta", objetoAlerta.getIdAlerta());
+
                 } else {
                     mostrarNotificacioAlerta(contexto, objetoAlerta.getDescripcion(), "canal_aviso", objetoAlerta.getIdAlerta());
                 }
