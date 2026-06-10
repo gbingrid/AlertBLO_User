@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Alert BLO</string>
+    <string name="app_name">AlertBLO</string>
     <string name="txt_alert_blo">AlertBLO</string>
     <string name="txt_todas">Todas</string>
     <string name="txt_historialalertas">Historial</string>
