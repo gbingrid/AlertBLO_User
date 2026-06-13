@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AlertBLO</string>
+    <string name="txt_alert_blo">AlertBLO</string>
+    <string name="txt_todas">Totes</string>
+    <string name="txt_historial_alertas">Historial</string>
+    <string name="txt_alertas_recientes">Recents</string>
+    <string name="txt_critica">Crítiques</string>
+    <string name="txt_aviso">Avisos</string>
+</resources>

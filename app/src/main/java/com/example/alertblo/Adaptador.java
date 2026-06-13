@@ -57,9 +57,9 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         ViewHolder(View v) {
             super(v);
             icono = v.findViewById(R.id.icono_alerta);
-            titulo = v.findViewById(R.id.txt_titulo);
-            descripcion = v.findViewById(R.id.txt_descripcion);
-            fechaHora = v.findViewById(R.id.txt_fechahora);
+            titulo = v.findViewById(R.id.titulo);
+            descripcion = v.findViewById(R.id.descripcion);
+            fechaHora = v.findViewById(R.id.fechahora);
         }
     }
 

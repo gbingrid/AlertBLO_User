@@ -32,7 +32,7 @@
             android:layout_marginStart="12dp" >
 
         <TextView
-            android:id="@+id/txt_titulo"
+            android:id="@+id/titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -40,14 +40,14 @@
             tools:text="@string/txt_titulo"/>
 
         <TextView
-            android:id="@+id/txt_descripcion"
+            android:id="@+id/descripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             tools:text="@string/txt_descripcion"/>
 
         <TextView
-            android:id="@+id/txt_fechahora"
+            android:id="@+id/fechahora"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="italic"

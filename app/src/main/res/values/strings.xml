@@ -1,13 +1,12 @@
 <resources>
-    <string name="app_name">AlertBLO</string>
-    <string name="txt_alert_blo">AlertBLO</string>
+    <string name="app_name" translatable="false">AlertBLO</string>
+    <string name="txt_alert_blo" translatable="false">AlertBLO</string>
     <string name="txt_todas">Todas</string>
-    <string name="txt_historialalertas">Historial</string>
     <string name="txt_alertas_recientes">Recientes</string>
     <string name="txt_critica">Criticas</string>
     <string name="txt_aviso">Avisos</string>
-    <string name="txt_historial_alertas">Historial</string>
-    <string name="txt_titulo">titulo</string>
-    <string name="txt_descripcion">descripcion</string>
-    <string name="txt_fechahora">fechahora</string>
+    <string name="txt_historial_alertas" translatable="false">Historial</string>
+    <string name="txt_titulo" translatable="false">titulo</string>
+    <string name="txt_descripcion" translatable="false">descripcion</string>
+    <string name="txt_fechahora" translatable="false">fechahora</string>
 </resources>
