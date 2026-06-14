@@ -7,4 +7,6 @@
     <string name="txt_alertas_recientes">Recents</string>
     <string name="txt_critica">Crítiques</string>
     <string name="txt_aviso">Avisos</string>
+    <string name="tit_menu_idioma">Ajustaments</string>
+    <string name="tit_idioma">Idioma</string>
 </resources>

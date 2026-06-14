@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -15,8 +17,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.tabs.TabLayout;
 
@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private static GestorGeofence geofence;
     private static final int LocRequestCode = 100;
 
+    // Aplica el idioma antes de que se infle el layout
+    @Override
+    protected void attachBaseContext(Context base){
+        super.attachBaseContext(GestorIdioma.cargarIdiomaGuardado(base));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
         todas = findViewById(R.id.chipTodas);
         critica = findViewById(R.id.chipAlertaCritica);
         aviso = findViewById(R.id.chipAlertaNormal);
-
         todas.setOnClickListener(v -> adaptador.filtrarAlerta("todas"));
         critica.setOnClickListener(v -> adaptador.filtrarAlerta("critica"));
         aviso.setOnClickListener(v -> adaptador.filtrarAlerta("aviso"));
+        //btnIdioma.setOnClickListener(v -> mostrarOpcIdioma());
 
         filtrosAlertas.addOnTabSelectedListener(
                 new TabLayout.OnTabSelectedListener() {
@@ -160,7 +166,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //************
+    // ALERTDIALOG PARA MOSTRAR OPCIONES DE IDIOMA
+    private void mostrarOpcIdioma(){
+        String[] idiomas = {"Español", "Valenciano"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Seleccionar idioma");
+        builder.setItems(idiomas, (dialog, which) -> {
+            if(which == 0){
+                GestorIdioma.setIdioma(this, "es");
+            }else{
+                GestorIdioma.setIdioma(this, "ca");
+            }
+            recreate();
+        });
+        builder.show();
+    }
+
 
     // Funció que prepara l'app: obté l'ID del dispositiu, demana permisos i arranca el servei en segon pla.
     private void PrepararApp() {
