@@ -7,7 +7,11 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.Spinner;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -28,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private static Context contexto;
     private static Adaptador adaptador;
     private static RecyclerView alertasActivas;
+    private Spinner spnIdioma;
+    private ImageButton btnSalir;
+    private static final String[] codigosIdioma = {"es", "ca"};
     private TabLayout filtrosAlertas;
     private Chip todas, critica, aviso;
 
@@ -47,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         alertasActivas = findViewById(R.id.recyclerViewAlertas);
         alertasActivas.setLayoutManager(new LinearLayoutManager(this));
-
         adaptador = new Adaptador();
         alertasActivas.setAdapter(adaptador);
 
@@ -56,10 +62,36 @@ public class MainActivity extends AppCompatActivity {
         todas = findViewById(R.id.chipTodas);
         critica = findViewById(R.id.chipAlertaCritica);
         aviso = findViewById(R.id.chipAlertaNormal);
+        spnIdioma = findViewById(R.id.spn_idioma);
+        btnSalir = findViewById(R.id.btn_salir);
         todas.setOnClickListener(v -> adaptador.filtrarAlerta("todas"));
         critica.setOnClickListener(v -> adaptador.filtrarAlerta("critica"));
         aviso.setOnClickListener(v -> adaptador.filtrarAlerta("aviso"));
-        //btnIdioma.setOnClickListener(v -> mostrarOpcIdioma());
+        btnSalir.setOnClickListener(v -> mostrarDialogoSalir());
+
+        ArrayAdapter<String> adapterIdioma = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item,
+                new String[]{getString(R.string.txt_idioma_es),
+                getString(R.string.txt_idioma_ca)});
+        adapterIdioma.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnIdioma.setAdapter(adapterIdioma);
+
+        String idiomaActual = GestorIdioma.getIdiomaActual(this);
+        int posActual = idiomaActual.equals("ca") ? 1 : 0;
+        spnIdioma.setSelection(posActual, false);
+
+        spnIdioma.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+                String nuevoIdioma = codigosIdioma[position];
+                if(!nuevoIdioma.equals(GestorIdioma.getIdiomaActual(MainActivity.this))){
+                    GestorIdioma.setIdioma(MainActivity.this, nuevoIdioma);
+                    recreate();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent){}
+        });
 
         filtrosAlertas.addOnTabSelectedListener(
                 new TabLayout.OnTabSelectedListener() {
@@ -166,22 +198,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // ALERTDIALOG PARA MOSTRAR OPCIONES DE IDIOMA
-    private void mostrarOpcIdioma(){
-        String[] idiomas = {"Español", "Valenciano"};
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setTitle("Seleccionar idioma");
-        builder.setItems(idiomas, (dialog, which) -> {
-            if(which == 0){
-                GestorIdioma.setIdioma(this, "es");
-            }else{
-                GestorIdioma.setIdioma(this, "ca");
-            }
-            recreate();
-        });
-        builder.show();
+    // ALERTDIALOG PARA MOSTRAR DIALOGO SALIR
+    private void mostrarDialogoSalir(){
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.txt_salir))
+                .setMessage(getString(R.string.txt_confirmar_salir))
+                .setPositiveButton(getString(R.string.txt_si), (d, w) -> finishAffinity())
+                .setNegativeButton(getString(R.string.txt_cancelar), null)
+                .show();
     }
 
 

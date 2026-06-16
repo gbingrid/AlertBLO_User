@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">AlertBLO</string>
     <string name="txt_alert_blo" translatable="false">AlertBLO</string>
-
     <string name="txt_todas">Todas</string>
     <string name="txt_alertas_recientes">Recientes</string>
     <string name="txt_critica">Criticas</string>
@@ -10,7 +9,14 @@
     <string name="txt_titulo" translatable="false">titulo</string>
     <string name="txt_descripcion" translatable="false">descripcion</string>
     <string name="txt_fechahora" translatable="false">fechahora</string>
-
-    <string name="tit_menu_idioma">Ajustes</string>
-    <string name="tit_idioma">Idioma</string>
+    <string-array name="idiomas">
+        <item>Castellano</item>
+        <item>Valenciano</item>
+    </string-array>
+    <string name="txt_salir">salir</string>
+    <string name="txt_confirmar_salir">Confirmar salir</string>
+    <string name="txt_si">Si</string>
+    <string name="txt_cancelar">Cancelar</string>
+    <string name="txt_idioma_ca">Valenciano</string>
+    <string name="txt_idioma_es">Castellano</string>
 </resources>

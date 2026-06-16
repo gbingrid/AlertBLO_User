@@ -9,4 +9,5 @@
     <string name="txt_aviso">Avisos</string>
     <string name="tit_menu_idioma">Ajustaments</string>
     <string name="tit_idioma">Idioma</string>
+    <string name="txt_salir">salir</string>
 </resources>
