@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AlertBLO</string>
-    <string name="txt_alert_blo">AlertBLO</string>
     <string name="txt_todas">Totes</string>
     <string name="txt_historial_alertas">Historial</string>
     <string name="txt_alertas_recientes">Recents</string>
     <string name="txt_critica">Crítiques</string>
     <string name="txt_aviso">Avisos</string>
-    <string name="tit_menu_idioma">Ajustaments</string>
-    <string name="tit_idioma">Idioma</string>
-    <string name="txt_salir">salir</string>
+    <string name="tit_menu_idioma">Canviar Idioma</string>
+    <string-array name="idiomas">
+        <item>Castellà</item>
+        <item>Valencià</item>
+    </string-array>
+    <string name="txt_salir">Sortir</string>
+    <string name="txt_confirmar_salir">Confirmar sortir</string>
+    <string name="txt_si">Si</string>
+    <string name="txt_cancelar">Cancel·la</string>
 </resources>

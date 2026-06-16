@@ -5,7 +5,7 @@
     <string name="txt_alertas_recientes">Recientes</string>
     <string name="txt_critica">Criticas</string>
     <string name="txt_aviso">Avisos</string>
-    <string name="txt_historial_alertas" translatable="false">Historial</string>
+    <string name="txt_historial_alertas">Historial</string>
     <string name="txt_titulo" translatable="false">titulo</string>
     <string name="txt_descripcion" translatable="false">descripcion</string>
     <string name="txt_fechahora" translatable="false">fechahora</string>
@@ -17,7 +17,5 @@
     <string name="txt_confirmar_salir">Confirmar salir</string>
     <string name="txt_si">Si</string>
     <string name="txt_cancelar">Cancelar</string>
-    <string name="txt_idioma_ca">Valenciano</string>
-    <string name="txt_idioma_es">Castellano</string>
     <string name="tit_menu_idioma">Cambiar idioma</string>
 </resources>

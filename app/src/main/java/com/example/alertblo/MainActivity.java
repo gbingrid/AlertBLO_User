@@ -7,9 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import androidx.appcompat.app.AlertDialog;
@@ -34,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private static RecyclerView alertasActivas;
     private Spinner spnIdioma;
     private ImageButton btnSalir;
-    private static final String[] codigosIdioma = {"es", "ca"};
     private TabLayout filtrosAlertas;
     private Chip todas, critica, aviso;
 
@@ -69,29 +65,8 @@ public class MainActivity extends AppCompatActivity {
         aviso.setOnClickListener(v -> adaptador.filtrarAlerta("aviso"));
         btnSalir.setOnClickListener(v -> mostrarDialogoSalir());
 
-        ArrayAdapter<String> adapterIdioma = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_item,
-                new String[]{getString(R.string.txt_idioma_es),
-                getString(R.string.txt_idioma_ca)});
-        adapterIdioma.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnIdioma.setAdapter(adapterIdioma);
+        GestorIdioma.configurarSpinner(spnIdioma, this);
 
-        String idiomaActual = GestorIdioma.getIdiomaActual(this);
-        int posActual = idiomaActual.equals("ca") ? 1 : 0;
-        spnIdioma.setSelection(posActual, false);
-
-        spnIdioma.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
-                String nuevoIdioma = codigosIdioma[position];
-                if(!nuevoIdioma.equals(GestorIdioma.getIdiomaActual(MainActivity.this))){
-                    GestorIdioma.setIdioma(MainActivity.this, nuevoIdioma);
-                    recreate();
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent){}
-        });
 
         filtrosAlertas.addOnTabSelectedListener(
                 new TabLayout.OnTabSelectedListener() {
@@ -115,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
         solicitarPermiso();
         PrepararApp();
     }
