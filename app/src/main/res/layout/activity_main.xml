@@ -16,7 +16,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:spinnerMode="dialog"
+            android:prompt="@string/tit_menu_idioma" />
 
         <TextView
             android:id="@+id/txtAppName"
