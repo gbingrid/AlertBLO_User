@@ -4,8 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -141,24 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
         if("canal_alerta".equals(canal)){
             creadorNotificacion.setPriority(NotificationCompat.PRIORITY_MAX).setCategory(NotificationCompat.CATEGORY_ALARM);
-            // Forzar el sonido de la alerta crítica
-            try{
-                MediaPlayer mediaPlayer = MediaPlayer.create(contexto, R.raw.sonidoalarma);
-
-                if(mediaPlayer != null){
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-
-                    AudioManager audioManager = (AudioManager) contexto.getSystemService(Context.AUDIO_SERVICE);
-                    if(audioManager != null){
-                        int maxVolumen = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
-                        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolumen, 0);
-                    }
-                    mediaPlayer.start();
-                }
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
 
         } else {
             creadorNotificacion.setPriority(NotificationCompat.PRIORITY_LOW);
