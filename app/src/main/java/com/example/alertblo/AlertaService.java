@@ -100,7 +100,6 @@ public class AlertaService extends Service {
             canalAviso.enableVibration(false);
             nm.createNotificationChannel(canalAviso);
 
-            Log.d("ALERTA", "DND access: " + nm.isNotificationPolicyAccessGranted());
         }
     }
 

@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        solicitarPermiso();
+        PrepararApp();
 
         alertasActivas = findViewById(R.id.recyclerViewAlertas);
         alertasActivas.setLayoutManager(new LinearLayoutManager(this));
@@ -91,8 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        solicitarPermiso();
-        PrepararApp();
+
     }
 
     // Consulta al servidor si hi ha una alerta nova per a aquest dispositiu.
@@ -195,13 +196,6 @@ public class MainActivity extends AppCompatActivity {
         // Demanar permís de notificacions a Android 13+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 1);
-        }
-
-        // Solicitar al usuario permiso para modificar o ignorar el modo No Molestar
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        if(!notificationManager.isNotificationPolicyAccessGranted() && notificationManager != null){
-            Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-            startActivity(intent);
         }
 
         // Arrancar el servei en segon pla que comprova alertes cada 20 segons.
