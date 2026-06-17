@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
         GestorIdioma.configurarSpinner(spnIdioma, this);
 
-
         filtrosAlertas.addOnTabSelectedListener(
                 new TabLayout.OnTabSelectedListener() {
                     @Override
@@ -155,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //************BLOQUE DE FUNCIONES PARA GEOLOCALIZACIÓN
 
     // Función que solicita permisos al usuario para geolocalización
     private void solicitarPermiso(){
