@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.*;
+import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -98,6 +99,8 @@ public class AlertaService extends Service {
                     NotificationManager.IMPORTANCE_LOW);
             canalAviso.enableVibration(false);
             nm.createNotificationChannel(canalAviso);
+
+            Log.d("ALERTA", "DND access: " + nm.isNotificationPolicyAccessGranted());
         }
     }
 
