@@ -26,7 +26,7 @@ public class GestorGeofence {
 
         fusedClient.getLastLocation().addOnSuccessListener(location -> {
             if(location == null) { // Si no hay ubicación reciente, se notifica como aviso
-                MainActivity.mostrarNotificacioAlerta(contexto, alerta, "canal_aviso");
+                MainActivity.mostrarNotificacioAlerta(contexto, alerta, "canal_alerta");
                 return;
             }
 

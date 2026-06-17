@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -112,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
                 if(objetoAlerta.getSilencio() == 0){ // Es Alerta crítica
                     if(geofence != null){
                         geofence.comprobarNotificar(objetoAlerta);
-                    } else { // Si la ubicación no está disponible, se notifica como aviso
-                        MainActivity.mostrarNotificacioAlerta(contexto, objetoAlerta, "canal_aviso");
+                    } else { // Si la ubicación no está disponible, se notifica como alerta
+                        MainActivity.mostrarNotificacioAlerta(contexto, objetoAlerta, "canal_alerta");
                     }
 
                 } else {
@@ -139,6 +141,25 @@ public class MainActivity extends AppCompatActivity {
 
         if("canal_alerta".equals(canal)){
             creadorNotificacion.setPriority(NotificationCompat.PRIORITY_MAX).setCategory(NotificationCompat.CATEGORY_ALARM);
+            // Forzar el sonido de la alerta crítica
+            try{
+                MediaPlayer mediaPlayer = MediaPlayer.create(contexto, R.raw.sonidoalarma);
+
+                if(mediaPlayer != null){
+                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+
+                    AudioManager audioManager = (AudioManager) contexto.getSystemService(Context.AUDIO_SERVICE);
+                    if(audioManager != null){
+                        int maxVolumen = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+                        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolumen, 0);
+                    }
+                    mediaPlayer.start();
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         } else {
             creadorNotificacion.setPriority(NotificationCompat.PRIORITY_LOW);
         }
@@ -164,14 +185,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == LocRequestCode && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            geofence = new GestorGeofence(getApplicationContext());
-        }
-    }
-
     // ALERTDIALOG PARA MOSTRAR DIALOGO SALIR
     private void mostrarDialogoSalir(){
         new AlertDialog.Builder(this)
@@ -180,6 +193,13 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.txt_si), (d, w) -> finishAffinity())
                 .setNegativeButton(getString(R.string.txt_cancelar), null)
                 .show();
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == LocRequestCode && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            geofence = new GestorGeofence(getApplicationContext());
+        }
     }
 
 

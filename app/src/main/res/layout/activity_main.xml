@@ -46,7 +46,6 @@
             android:contentDescription="@string/txt_salir"
             android:src="@drawable/ic_salir" />
 
-
     </RelativeLayout>
 
     <Space
