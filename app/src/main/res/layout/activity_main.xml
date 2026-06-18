@@ -1,112 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="24dp" >
+    android:orientation="vertical" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/contenedor_fragmentos"
+            android:layout_weight="1" />
 
-        <Spinner
-            android:id="@+id/spn_idioma"
-            android:layout_width="wrap_content"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:minHeight="48dp"
-            android:spinnerMode="dialog"
-            android:prompt="@string/tit_menu_idioma" />
-
-        <TextView
-            android:id="@+id/txtAppName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/btn_salir"
-            android:layout_toEndOf="@id/spn_idioma"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:gravity="center"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:text="@string/txt_alert_blo"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/btn_salir"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/txt_salir"
-            android:src="@drawable/ic_salir" />
-
-    </RelativeLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="40dp" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayoutAlertas"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="#0A1128" >
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/alertas_recientes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_alertas_recientes" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/historial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_historial_alertas" />
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="48dp">
-
-        <com.google.android.material.chip.ChipGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipTodas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_todas" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipAlertaCritica"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_critica"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipAlertaNormal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_aviso" />
-
-        </com.google.android.material.chip.ChipGroup>
-    </HorizontalScrollView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewAlertas"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+            android:id="@+id/btn_navegacion"
+            app:menu="@menu/btn_nav_menu" />
 
 </LinearLayout>

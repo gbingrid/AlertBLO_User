@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp" >
+
+    <TextView
+        android:id="@+id/historial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/txt_historial_alertas"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingBottom="12dp" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupFiltros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp" >
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipTodas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_todas"
+            android:checked="true"
+            style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAlertaCritica"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_critica"
+            style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAlertaNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_aviso"
+            style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <FrameLayout
+        android:id="@+id/contenedor_lista_historial"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

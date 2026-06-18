@@ -1,7 +1,6 @@
 package com.example.alertblo;
 
 import android.Manifest;
-import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +24,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.chip.Chip;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,13 +32,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String IP_SERVIDOR = "http://13.63.226.223"; // IP del servidor
 
     private static Context contexto;
-    private static Adaptador adaptador;
-    private static RecyclerView alertasActivas;
-    private Spinner spnIdioma;
-    private ImageButton btnSalir;
-    private TabLayout filtrosAlertas;
-    private Chip todas, critica, aviso;
-
+    public static Adaptador adaptador;
+    public static RecyclerView alertasActivas;
     private static GestorGeofence geofence;
     private static final int LocRequestCode = 100;
 
@@ -54,52 +47,45 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        contexto = getApplicationContext();
         solicitarPermiso();
         PrepararApp();
 
-        alertasActivas = findViewById(R.id.recyclerViewAlertas);
+        alertasActivas = new RecyclerView(this);
         alertasActivas.setLayoutManager(new LinearLayoutManager(this));
         adaptador = new Adaptador();
         alertasActivas.setAdapter(adaptador);
 
-        filtrosAlertas = findViewById(R.id.tabLayoutAlertas);
-        contexto = getApplicationContext();
-        todas = findViewById(R.id.chipTodas);
-        critica = findViewById(R.id.chipAlertaCritica);
-        aviso = findViewById(R.id.chipAlertaNormal);
-        spnIdioma = findViewById(R.id.spn_idioma);
-        btnSalir = findViewById(R.id.btn_salir);
-        todas.setOnClickListener(v -> adaptador.filtrarAlerta("todas"));
-        critica.setOnClickListener(v -> adaptador.filtrarAlerta("critica"));
-        aviso.setOnClickListener(v -> adaptador.filtrarAlerta("aviso"));
-        btnSalir.setOnClickListener(v -> mostrarDialogoSalir());
+        // Cargar FragmentHome por defecto
+        if(savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contenedor_fragmentos, new FragmentHome())
+                    .commit();
+        }
 
-        GestorIdioma.configurarSpinner(spnIdioma, this);
+        // Configurar la barra de navegación inferior
+        com.google.android.material.bottomnavigation.BottomNavigationView bottomNavigationView = findViewById(R.id.btn_navegacion);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            androidx.fragment.app.Fragment fragmentSelecionado = null;
+            int id = item.getItemId();
 
-        filtrosAlertas.addOnTabSelectedListener(
-                new TabLayout.OnTabSelectedListener() {
-                    @Override
-                    public void onTabSelected(TabLayout.Tab tab) {
-                        if(tab.getPosition() == 0){
-                            adaptador.filtrarRecientes();
-                        } else {
-                            adaptador.filtrarAlerta("todas");
-                        }
-                    }
+            if(id == R.id.ic_nav_home){
+                fragmentSelecionado = new FragmentHome();
+            }else if(id == R.id.ic_nav_historial){
+                fragmentSelecionado = new FragmentHistorial();
+            }else if(id == R.id.ic_nav_idioma){
+                mostrarDialogoIdioma();
+                return false;
+            }
 
-                    @Override
-                    public void onTabUnselected(TabLayout.Tab tab) {
-
-                    }
-
-                    @Override
-                    public void onTabReselected(TabLayout.Tab tab) {
-
-                    }
-                }
-        );
-
-
+            if(fragmentSelecionado != null){
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contenedor_fragmentos, fragmentSelecionado)
+                        .commit();
+                return true;
+            }
+            return false;
+        });
     }
 
     // Consulta al servidor si hi ha una alerta nova per a aquest dispositiu.
@@ -216,6 +202,25 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
+    private void mostrarDialogoIdioma(){
+        Spinner spinner = new Spinner(this);
+
+        // Añadir margen interno
+        int paddingPx = (int) (16 * getResources().getDisplayMetrics().density);
+        spinner.setPadding(paddingPx, paddingPx, paddingPx, paddingPx);
+
+        // Usar la clase GestorIdioma pasando el Spinner creado y el Activity
+        GestorIdioma.configurarSpinner(spinner, this);
+
+        // Construir y lanzar AlertDialog
+        new AlertDialog.Builder(this)
+                .setTitle("Idioma")
+                .setView(spinner)
+                .setPositiveButton(getString(R.string.txt_aceptar), (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .show();
+    }
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == LocRequestCode && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
@@ -245,5 +250,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             startService(srv);
         }
+
+    }
+
+    public void mostrarDialogoSalirPublico(){
+        mostrarDialogoSalir();
     }
 }
