@@ -14,21 +14,30 @@ public class FragmentHistorial extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
+
         View view = inflater.inflate(R.layout.fragment_historial, container, false);
 
         Chip todas = view.findViewById(R.id.chipTodas);
         Chip critica = view.findViewById(R.id.chipAlertaCritica);
         Chip aviso = view.findViewById(R.id.chipAlertaNormal);
 
-        todas.setOnClickListener(v -> {
-            if(MainActivity.adaptador != null) MainActivity.adaptador.filtrarAlerta("todas");
-        });
-        critica.setOnClickListener(v -> {
-            if(MainActivity.adaptador != null) MainActivity.adaptador.filtrarAlerta("critica");
-        });
-        aviso.setOnClickListener(v -> {
-            if(MainActivity.adaptador != null) MainActivity.adaptador.filtrarAlerta("aviso");
-        });
+        if(todas != null){
+            todas.setOnClickListener(v -> {
+                if(MainActivity.adaptador != null) MainActivity.adaptador.filtrarAlerta("todas");
+            });
+        }
+
+        if(critica != null){
+            critica.setOnClickListener(v -> {
+                if(MainActivity.adaptador != null) MainActivity.adaptador.filtrarAlerta("critica");
+            });
+        }
+
+        if(aviso != null){
+            aviso.setOnClickListener(v -> {
+                if(MainActivity.adaptador != null) MainActivity.adaptador.filtrarAlerta("aviso");
+            });
+        }
 
         return view;
     }
@@ -44,9 +53,12 @@ public class FragmentHistorial extends Fragment{
         }
 
         if(MainActivity.alertasActivas != null){
+
             contenedorLista.addView(MainActivity.alertasActivas);
+
             if(MainActivity.adaptador != null){
                 MainActivity.adaptador.filtrarAlerta("todas");
+                MainActivity.adaptador.notifyDataSetChanged();
             }
 
         }
