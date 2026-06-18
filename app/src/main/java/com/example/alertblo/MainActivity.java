@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Construir y lanzar AlertDialog
         new AlertDialog.Builder(this)
-                .setTitle("Idioma")
+                .setTitle(getString(R.string.tit_menu_idioma))
                 .setView(spinner)
                 .setPositiveButton(getString(R.string.txt_aceptar), (dialog, which) -> {
                     dialog.dismiss();

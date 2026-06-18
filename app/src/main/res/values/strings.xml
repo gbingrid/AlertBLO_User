@@ -13,11 +13,12 @@
         <item>Castellano</item>
         <item>Valenciano</item>
     </string-array>
-    <string name="txt_salir">salir</string>
+    <string name="txt_salir">Salir</string>
     <string name="txt_confirmar_salir">Confirmar salir</string>
     <string name="txt_si">Si</string>
     <string name="txt_cancelar">Cancelar</string>
     <string name="tit_menu_idioma">Cambiar idioma</string>
+    <string name="txt_aceptar">Aceptar</string>
     <string name="tit_inicio">Inicio</string>
     <string name="tit_historial">Historial</string>
     <string name="tit_ajustes">Ajustes</string>

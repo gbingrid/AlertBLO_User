@@ -51,8 +51,8 @@
         android:textSize="13sp"
         android:text="@string/txt_alertas_recientes" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewAlertas"
+    <FrameLayout
+        android:id="@+id/contenedor_lista_home"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

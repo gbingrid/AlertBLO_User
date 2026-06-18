@@ -37,14 +37,32 @@ public class FragmentHome extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle saverInstanceState){
         super.onViewCreated(view, saverInstanceState);
 
-        ViewGroup contenedorLista = view.findViewById(R.id.contenedor)
+        ViewGroup contenedorLista = view.findViewById(R.id.contenedor_lista_home);
+
+        // Desenganchar de forma segura el RecyclerView de cualquier otra pantalla anterior
+        if(MainActivity.alertasActivas != null && MainActivity.alertasActivas.getParent() != null){
+            ((ViewGroup) MainActivity.alertasActivas.getParent()).removeView(MainActivity.alertasActivas);
+        }
+
+        // Inserta el RecyclerView vivo de la MainActivity dentro de este fragmento
+        if(MainActivity.alertasActivas != null){
+            contenedorLista.addView(MainActivity.alertasActivas);
+
+            // Solicitar al Adaptador que aplique el filtro de Recientes
+            if(MainActivity.adaptador != null){
+                MainActivity.adaptador.filtrarRecientes();
+            }
+
+        }
+
     }
+
     @Override
     public void onResume() {
         super.onResume();
         // Filtrar nuevamente al regresar a la pantalla por si pasó el tiempo
-        if (adaptador != null) {
-            adaptador.filtrarRecientes();
+        if (MainActivity.adaptador != null) {
+            MainActivity.adaptador.filtrarRecientes();
         }
     }
 }
