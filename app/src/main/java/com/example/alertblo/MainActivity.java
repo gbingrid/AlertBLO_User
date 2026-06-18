@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         alertasActivas = new RecyclerView(this);
         alertasActivas.setLayoutManager(new LinearLayoutManager(this));
         adaptador = new Adaptador();
+
+        adaptador.cargarAlertasDelDispositivo(this);
         alertasActivas.setAdapter(adaptador);
 
         // Cargar FragmentHome por defecto
@@ -220,9 +222,20 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle(getString(R.string.tit_menu_idioma))
                 .setView(spinner)
                 .setPositiveButton(getString(R.string.txt_aceptar), (dialog, which) -> {
+                    if(adaptador != null){
+                        adaptador.guardarAlertasEnDispositivo(this);
+                    }
                     dialog.dismiss();
                 })
                 .show();
+    }
+
+    @Override
+    protected void onDestroy(){
+        if(adaptador != null){
+            adaptador.guardarAlertasEnDispositivo(this);
+        }
+        super.onDestroy();
     }
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

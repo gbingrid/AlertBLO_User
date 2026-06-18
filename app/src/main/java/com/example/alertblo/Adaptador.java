@@ -1,5 +1,7 @@
 package com.example.alertblo;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.card.MaterialCardView;
+
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +50,53 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
             if(a.getTimestamp() >= hace24h) listaAlertas.add(a);
         }
         notifyDataSetChanged();
+    }
+
+    public void guardarAlertasEnDispositivo(Context context){
+        SharedPreferences prefs = context.getSharedPreferences("historial_alertas", Context.MODE_PRIVATE);
+        JSONArray jsonArray = new JSONArray();
+
+        for(Alerta a: this.todas){
+            try{
+                org.json.JSONObject obj = new org.json.JSONObject();
+                obj.put("ID_ALERTA", a.getIdAlerta());
+                obj.put("TEXT_ALERTA", a.getDescripcion());
+                obj.put("SILENCIO", a.getSilencio());
+                obj.put("TIMESTAMP_GUARDADO", a.getTimestamp()); // Guardamos su tiempo real
+                jsonArray.put(obj);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        prefs.edit().putString("lista_guardada", jsonArray.toString()).apply();
+    }
+
+    public void cargarAlertasDelDispositivo(Context contexto) {
+        SharedPreferences prefs = contexto.getSharedPreferences("almacen_alertas", Context.MODE_PRIVATE);
+        String jsonString = prefs.getString("lista_guardada", null);
+
+        if (jsonString != null) {
+            try {
+                JSONArray jsonArray = new JSONArray(jsonString);
+                this.todas.clear();
+                this.listaAlertas.clear(); // Tus listas del adaptador
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    org.json.JSONObject obj = jsonArray.getJSONObject(i);
+                    Alerta a = new Alerta(
+                            obj.getInt("ID_ALERTA"),
+                            obj.getString("TEXT_ALERTA"),
+                            obj.getInt("SILENCIO")
+                    );
+                    // Le devolvemos su timestamp original para que no falle el filtro de 24h
+                    a.setTimestamp(obj.optLong("TIMESTAMP_GUARDADO", System.currentTimeMillis()));
+
+                    this.todas.add(a);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
