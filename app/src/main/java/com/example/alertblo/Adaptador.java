@@ -27,6 +27,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         todas.add(0, alerta);
         listaAlertas.add(0, alerta);
         notifyItemInserted(0);
+        guardarAlertasEnDispositivo(MainActivity.alertasActivas.getContext());
     }
 
     public void filtrarAlerta(String tipo){
@@ -72,7 +73,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
     }
 
     public void cargarAlertasDelDispositivo(Context contexto) {
-        SharedPreferences prefs = contexto.getSharedPreferences("almacen_alertas", Context.MODE_PRIVATE);
+        SharedPreferences prefs = contexto.getSharedPreferences("historial_alertas", Context.MODE_PRIVATE);
         String jsonString = prefs.getString("lista_guardada", null);
 
         if (jsonString != null) {

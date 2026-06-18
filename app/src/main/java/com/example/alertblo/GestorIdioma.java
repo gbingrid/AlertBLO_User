@@ -122,6 +122,10 @@ public class GestorIdioma{
 
                 // Solo se cambia algo si el idioma seleccionado es distinto al actual para no realizar cambios innecesarios
                 if(!nuevoIdioma.equals(getIdiomaActual(mainActivity))){
+                    if(MainActivity.adaptador != null){
+                        MainActivity.adaptador.guardarAlertasEnDispositivo(mainActivity);
+                    }
+
                     setIdioma(mainActivity, nuevoIdioma);
                     // recreate() destruye y vuelve a crear la Activity entera, se ejecuta nuevamente AttachBaseContext() y se muestran los textos en el nuevo idioma
                     mainActivity.recreate();

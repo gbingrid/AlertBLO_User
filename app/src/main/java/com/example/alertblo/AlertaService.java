@@ -55,6 +55,7 @@ public class AlertaService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        handler.removeCallbacks(comprovador);
         // Iniciar el bucle de comprovació
         handler.post(comprovador);
         // START_STICKY: Android reinicia el servei si el mata
