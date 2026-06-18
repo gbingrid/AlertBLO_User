@@ -51,6 +51,7 @@ public class FragmentHome extends Fragment {
             // Solicitar al Adaptador que aplique el filtro de Recientes
             if(MainActivity.adaptador != null){
                 MainActivity.adaptador.filtrarRecientes();
+                MainActivity.adaptador.notifyDataSetChanged();
             }
 
         }

@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
 
             if(objetoAlerta != null && !objetoAlerta.getDescripcion().isEmpty()){
 
+                // Inyectar milisegundos actuales del teléfono a la alerta
+                objetoAlerta.setTimestamp(System.currentTimeMillis());
+
                 new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
                     adaptador.addAlerta(objetoAlerta);
                     alertasActivas.smoothScrollToPosition(0);

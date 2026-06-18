@@ -12,32 +12,42 @@ public class Alerta {
     private final String descripcion;
     private int silencio = 0;
     private final String fecha_hora;
-    private final long timestamp = System.currentTimeMillis();
+    private long timestamp = System.currentTimeMillis();
 
     public Alerta(int id_Alerta, String descripcion, int silencio) {
         this.id_Alerta = id_Alerta;
         this.descripcion = descripcion;
         this.silencio = silencio;
         this.fecha_hora = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(new Date());
+        this.timestamp = System.currentTimeMillis();
+    }
+
+    public void setTimestamp(long tiempo){
+        this.timestamp = tiempo;
     }
 
     public long getTimestamp() {
+
         return timestamp;
     }
 
     public int getIdAlerta(){
+
         return id_Alerta;
     }
 
     public String getDescripcion(){
+
         return descripcion;
     }
 
     public int getSilencio(){
+
         return silencio;
     }
 
     public String getFechaHora(){
+
         return fecha_hora;
     }
 
