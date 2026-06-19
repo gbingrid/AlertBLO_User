@@ -13,7 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.Spinner;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +23,6 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -121,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
     // Mostra una notificació amb el text de l'alerta rebuda, i sona encara que el mòbil estigui en silenci.
     static void mostrarNotificacioAlerta(Context contexto, Alerta alerta, String canal) {

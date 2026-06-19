@@ -3,5 +3,37 @@
     <style name="Base.Theme.AlertBLO" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:statusBarColor">@color/fondo_gris</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowBackground">@color/fondo_gris</item>
+
+        <item name="colorPrimary">@color/amarillo</item>
+        <item name="colorOnPrimary">@color/negro</item>
+
+        <item name="colorOnSecondaryContainer">@color/gris_oscuro</item>
+        <item name="colorSecondaryContainer">@color/fondo_tarjeta</item>
+
+        <item name="colorSurface">@color/gris_oscuro</item>
+        <item name="colorOnSurface">@color/blanco</item>
+        <item name="colorSurfaceVariant">@color/gris</item>
+        <item name="colorOnSurfaceVariant">@color/gris_claro</item>
+        <item name="colorOutline">@color/negro</item>
+
+        <item name="colorAlertaCritica">@color/rojo</item>
+        <item name="colorOnAlertaCritica">@color/blanco</item>
+        <item name="colorAlertaCriticaContainer">@color/rojo</item>
+
+        <item name="colorAviso">@color/gris_claro</item>
+        <item name="colorOnAviso">@color/gris_oscuro</item>
+        <item name="colorAvisoContainer">@color/gris_oscuro</item>
+
+        <item name="elevationOverlayEnabled">false</item>
+        <item name="elevationOverlayColor">@android:color/transparent</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.AlertBLO.BottomNavigationView</item>
+       </style>
+    
+    <style name="Widget.AlertBLO.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="backgroundTint">?attr/colorAvisoContainer</item>
     </style>
 </resources>

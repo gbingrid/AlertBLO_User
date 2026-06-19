@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="4dp"
         android:paddingBottom="12dp"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:text="@string/txt_alertas_recientes"
         android:textColor="?attr/colorOnSurfaceVariant"/>
 
