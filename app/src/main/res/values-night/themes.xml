@@ -7,8 +7,9 @@
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowBackground">@color/fondo_gris</item>
 
-        <item name="colorPrimary">@color/amarillo</item>
-        <item name="colorOnPrimary">@color/negro</item>
+        <item name="colorPrimary">@color/gris</item>
+        <item name="colorSecondary">@color/amarillo</item>
+        <item name="colorOnPrimary">@color/amarillo</item>
 
         <item name="colorOnSecondaryContainer">@color/gris_oscuro</item>
         <item name="colorSecondaryContainer">@color/fondo_tarjeta</item>

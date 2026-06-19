@@ -10,7 +10,7 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="3dp"
     app:cardBackgroundColor="?attr/colorSurface"
-    app:strokeWidth="2dp" >
+    app:strokeWidth="1dp" >
 
     <LinearLayout
         android:layout_width="match_parent"

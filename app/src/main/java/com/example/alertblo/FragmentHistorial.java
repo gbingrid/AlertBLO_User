@@ -67,23 +67,16 @@ public class FragmentHistorial extends Fragment{
 
     // Actualizar estado de los filtros
     private void actualizarEstadosFiltros(Chip chipActivo) {
-        if (getContext() == null || todas == null || critica == null || aviso == null) return;
+        if (todas == null || critica == null || aviso == null) return;
 
-        int colorApagadoTexto = ContextCompat.getColor(requireContext(), R.color.gris_claro);
-        int colorEncendidoTexto = ContextCompat.getColor(requireContext(), R.color.negro);
+        todas.setChecked(false);
+        critica.setChecked(false);
+        aviso.setChecked(false);
 
-        todas.setChipBackgroundColorResource(R.color.gris_oscuro);
-        todas.setTextColor(colorApagadoTexto);
+        chipActivo.setChecked(true);
 
-        critica.setChipBackgroundColorResource(R.color.gris_oscuro);
-        critica.setTextColor(colorApagadoTexto);
-
-        aviso.setChipBackgroundColorResource(R.color.gris_oscuro);
-        aviso.setTextColor(colorApagadoTexto);
-
-        chipActivo.setChipBackgroundColorResource(R.color.amarillo);
-        chipActivo.setTextColor(colorEncendidoTexto);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);

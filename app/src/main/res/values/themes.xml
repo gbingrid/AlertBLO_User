@@ -10,7 +10,7 @@
 
         <item name="colorPrimary">@color/azul</item>
         <item name="colorOnPrimary">@color/blanco</item>
-        <item name="colorSecondary">@color/amarillo</item>
+        <item name="colorSecondary">@color/azul</item>
 
         <item name="colorOnSecondaryContainer">@color/gris</item>
         <item name="colorSecondaryContainer">@color/gris_claro</item>
@@ -23,11 +23,11 @@
 
         <item name="colorAlertaCritica">@color/rojo</item>
         <item name="colorOnAlertaCritica">@color/blanco</item>
-        <item name="colorAlertaCriticaContainer">@color/rojo_claro</item>
+        <item name="colorAlertaCriticaContainer">@color/rojo</item>
 
         <item name="colorAviso">@color/naranja</item>
         <item name="colorOnAviso">@color/blanco</item>
-        <item name="colorAvisoContainer">@color/naranja_claro</item>
+        <item name="colorAvisoContainer">@color/gris_claro</item>
 
         <item name="elevationOverlayEnabled">false</item>
         <item name="elevationOverlayColor">@android:color/transparent</item>

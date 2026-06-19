@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:text="@string/txt_todas"
             android:textColor="@color/chip_texto_selector"
+            android:checkable="true"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             app:chipIconTint="@color/azul"
             app:chipBackgroundColor="@color/chip_selector" />
@@ -57,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txt_critica"
+            android:checkable="true"
             android:textColor="@color/chip_texto_selector"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             app:chipIconTint="@color/azul"
@@ -67,6 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txt_aviso"
+            android:checkable="true"
             android:textColor="@color/chip_texto_selector"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             app:chipIconTint="@color/azul"
