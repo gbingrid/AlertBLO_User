@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.alertblo.R;
 
 public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
 
