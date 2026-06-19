@@ -10,6 +10,7 @@
     <color name="gris_claro">#D3D3D3</color>
     <color name="fondo_gris">#161719</color>
     <color name="fondo_tarjeta">#222326</color>
+    <color name="fondo_gris_oscuro">#161616</color>
 
     <!-- Texto -->
     <color name="azul_oscuro">#0A1128</color>
