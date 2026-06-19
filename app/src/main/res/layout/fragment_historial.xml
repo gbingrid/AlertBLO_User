@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/fondo">
+    android:background="?attr/android:windowBackground">
 
     <TextView
         android:id="@+id/historial"
@@ -16,7 +16,7 @@
         android:textStyle="bold"
         android:paddingBottom="12dp"
         android:paddingTop="14dp"
-        android:textColor="@color/texto_principal" />
+        android:textColor="?attr/colorOnSurface" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupFiltros"

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorAlertaCritica" format="color" />
+    <attr name="colorOnAlertaCritica" format="color" />
+    <attr name="colorAlertaCriticaContainer" format="color" />
+    <attr name="colorAviso" format="color" />
+    <attr name="colorOnAviso" format="color" />
+    <attr name="colorAvisoContainer" format="color" />
+</resources>

@@ -2,6 +2,7 @@ package com.example.alertblo;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -133,19 +134,43 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         h.descripcion.setText(alerta.getDescripcion());
         h.fechaHora.setText(alerta.getFechaHora());
 
-        // Asignar colores desde colors.xml
-        h.titulo.setTextColor(ContextCompat.getColor(context, R.color.texto_principal));
-        h.descripcion.setTextColor(ContextCompat.getColor(context, R.color.texto_secundario));
-        h.fechaHora.setTextColor(ContextCompat.getColor(context, R.color.texto_secundario));
+        // Crear contenedor temporal para gestión de colores del tema
+        TypedValue typedValue = new TypedValue();
 
-        // Asignar color e icono según el tipo de urgencia
+        // Asignar colores e icono según el tipo de urgencia
         if (alerta.getTipo() == Alerta.Tipo.CRITICA) {
             h.icono.setImageResource(R.drawable.ic_alerta_critica);
-            h.icono.setColorFilter(ContextCompat.getColor(context, R.color.rojo));
+
+            // Obtener colorAlertaCritica para icono y título
+            context.getTheme().resolveAttribute(R.attr.colorAlertaCritica, typedValue, true);
+            int colorTextAlertCritica = typedValue.data;
+            h.icono.setColorFilter(colorTextAlertCritica);
+            h.titulo.setTextColor(colorTextAlertCritica);
+
+            // Obtener colorAlertaCriticaContainer para el fondo de la tarjeta
+            context.getTheme().resolveAttribute(R.attr.colorAlertaCriticaContainer, typedValue, true);
+            h.itemView.setBackgroundColor(typedValue.data);
+
         } else {
             h.icono.setImageResource(R.drawable.ic_notification);
-            h.icono.setColorFilter(ContextCompat.getColor(context, R.color.naranja));
+
+            // Obtener colorAviso para icono y título
+            context.getTheme().resolveAttribute(R.attr.colorAviso, typedValue, true);
+            int colorTextAviso = typedValue.data;
+            h.icono.setColorFilter(colorTextAviso);
+            h.titulo.setTextColor(colorTextAviso);
+
+            // Obtener colorAvisoContainer para el fondo de la tarjeta
+            context.getTheme().resolveAttribute(R.attr.colorAvisoContainer, typedValue, true);
+            h.itemView.setBackgroundColor(typedValue.data);
+
         }
+
+        context.getTheme().resolveAttribute(android.R.attr.colorOnSurface, typedValue, true);
+        h.descripcion.setTextColor(typedValue.data);
+        context.getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant, typedValue, true);
+        h.fechaHora.setTextColor(typedValue.data);
+
 
     }
 

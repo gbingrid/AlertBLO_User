@@ -7,7 +7,7 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:paddingTop="14dp"
-    android:background="@color/fondo">
+    android:background="?attr/android:windowBackground">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             android:text="@string/txt_alert_blo"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@color/texto_principal" />
+            android:textColor="?attr/colorOnSurface" />
 
         <ImageButton
             android:id="@+id/btn_salir"
@@ -50,7 +50,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/txt_salir"
             android:src="@drawable/ic_salir"
-            app:tint="@color/texto_principal" />
+            app:tint="?attr/colorOnSurfaceVariant" />
 
     </RelativeLayout>
 
@@ -62,7 +62,7 @@
         android:paddingBottom="12dp"
         android:textSize="13sp"
         android:text="@string/txt_alertas_recientes"
-        android:textColor="@color/texto_secundario"/>
+        android:textColor="?attr/colorOnSurface"/>
 
     <FrameLayout
         android:id="@+id/contenedor_lista_home"
