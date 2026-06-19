@@ -174,6 +174,8 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
             h.fechaHora.setTextColor(typedValue.data);
         }
 
+
+
     }
 
     @Override

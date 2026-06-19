@@ -6,25 +6,27 @@
 
         <item name="android:statusBarColor">@color/fondo</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@color/fondo</item>
+
         <item name="colorPrimary">@color/azul</item>
         <item name="colorOnPrimary">@color/blanco</item>
-        <item name="colorSecondary">@color/amarillo</item>
-        <item name="colorOnSecondary">@color/azul_oscuro</item>
-        <item name="android:windowBackground">@color/fondo</item>
+
+        <item name="colorOnSecondaryContainer">@color/gris</item>
+        <item name="colorSecondaryContainer">@color/gris_claro</item>
+
         <item name="colorSurface">@color/blanco</item>
         <item name="colorOnSurface">@color/azul_oscuro</item>
         <item name="colorSurfaceVariant">@color/gris_claro</item>
         <item name="colorOnSurfaceVariant">@color/gris</item>
         <item name="colorOutline">@color/negro</item>
+
         <item name="colorAlertaCritica">@color/rojo</item>
         <item name="colorOnAlertaCritica">@color/blanco</item>
         <item name="colorAlertaCriticaContainer">@color/rojo_claro</item>
+
         <item name="colorAviso">@color/naranja</item>
         <item name="colorOnAviso">@color/blanco</item>
         <item name="colorAvisoContainer">@color/naranja_claro</item>
-
-        <item name="colorOnSecondaryContainer">@color/gris</item>
-        <item name="colorSecondaryContainer">@color/amarillo</item>
 
     </style>
 

@@ -5,8 +5,8 @@
     <color name="amarillo">#FFE613</color>
 
     <!-- Fondos -->
-    <color name="fondo">#F8F9FA</color>
-    <color name="blanco">#FFFFFF</color>
+    <color name="fondo">#FFFFFF</color>
+    <color name="blanco">#F8F9FA</color>
     <color name="gris_claro">#D3D3D3</color>
 
     <!-- Texto -->
