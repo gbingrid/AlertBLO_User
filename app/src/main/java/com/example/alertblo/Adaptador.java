@@ -104,13 +104,15 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         TextView titulo;
         TextView descripcion;
         TextView fechaHora;
+        com.google.android.material.card.MaterialCardView tarjetaAlerta;
 
-        ViewHolder(View v) {
-            super(v);
-            icono = v.findViewById(R.id.icono_alerta);
-            titulo = v.findViewById(R.id.titulo);
-            descripcion = v.findViewById(R.id.descripcion);
-            fechaHora = v.findViewById(R.id.fechahora);
+        public ViewHolder(@NonNull View itemView){
+            super(itemView);
+            icono = itemView.findViewById(R.id.icono_alerta);
+            titulo = itemView.findViewById(R.id.titulo);
+            descripcion = itemView.findViewById(R.id.descripcion);
+            fechaHora = itemView.findViewById(R.id.fechahora);
+            tarjetaAlerta = itemView.findViewById(R.id.tarjeta_alerta);
         }
     }
 
@@ -144,9 +146,9 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
             h.icono.setColorFilter(colorTextAlertCritica);
             h.titulo.setTextColor(colorTextAlertCritica);
 
-            // Obtener colorAlertaCriticaContainer para el fondo de la tarjeta
+            // Obtener color naranja claro del borde para la tarjeta
             context.getTheme().resolveAttribute(R.attr.colorAlertaCriticaContainer, typedValue, true);
-            h.itemView.setBackgroundColor(typedValue.data);
+            h.tarjetaAlerta.setStrokeColor(typedValue.data);
 
         } else {
             h.icono.setImageResource(R.drawable.ic_notification);
@@ -157,9 +159,9 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
             h.icono.setColorFilter(colorTextAviso);
             h.titulo.setTextColor(colorTextAviso);
 
-            // Obtener colorAvisoContainer para el fondo de la tarjeta
+            // Obtener color rojo claro del borde para la tarjeta
             context.getTheme().resolveAttribute(R.attr.colorAvisoContainer, typedValue, true);
-            h.itemView.setBackgroundColor(typedValue.data);
+            h.tarjetaAlerta.setStrokeColor(typedValue.data);
 
         }
 
