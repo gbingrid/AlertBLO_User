@@ -165,15 +165,12 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
 
         }
 
-
-        TypedValue tvColorOnSurface = MaterialAttributes.resolve(context, com.google.android.material.R.attr.colorOnSurface);
-        if(tvColorOnSurface != null){
-            h.descripcion.setTextColor(tvColorOnSurface.data);
+        if(context.getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnSurface, typedValue, true)){
+            h.descripcion.setTextColor(typedValue.data);
         }
 
-        TypedValue tvColorOnSurfaceVariant = MaterialAttributes.resolve(context, com.google.android.material.R.attr.colorOnSurfaceVariant);
-        if(tvColorOnSurfaceVariant != null){
-            h.fechaHora.setTextColor(tvColorOnSurfaceVariant.data);
+        if(context.getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant, typedValue, true)){
+            h.fechaHora.setTextColor(typedValue.data);
         }
 
     }
