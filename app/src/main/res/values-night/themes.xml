@@ -31,10 +31,17 @@
         <item name="elevationOverlayEnabled">false</item>
         <item name="elevationOverlayColor">@android:color/transparent</item>
 
+        <item name="buttonBarPositiveButtonStyle">@style/BotonDialogoSalir</item>
+        <item name="buttonBarNegativeButtonStyle">@style/BotonDialogoSalir</item>
+
         <item name="bottomNavigationStyle">@style/Widget.AlertBLO.BottomNavigationView</item>
        </style>
     
     <style name="Widget.AlertBLO.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="backgroundTint">?attr/colorAvisoContainer</item>
+    </style>
+
+    <style name="BotonDialogoSalir" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#F3CF55</item>
     </style>
 </resources>
