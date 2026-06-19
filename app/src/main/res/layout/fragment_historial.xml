@@ -7,16 +7,34 @@
     android:padding="16dp"
     android:background="?attr/android:windowBackground">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp" >
+
     <TextView
         android:id="@+id/historial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/txt_historial_alertas"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:paddingBottom="12dp"
         android:paddingTop="14dp"
         android:textColor="?attr/colorOnSurface" />
+
+    <ImageButton
+        android:id="@+id/btn_salir"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/txt_salir"
+        android:src="@drawable/ic_salir"
+        app:tint="?attr/colorOnSurfaceVariant" />
+
+    </RelativeLayout>
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupFiltros"

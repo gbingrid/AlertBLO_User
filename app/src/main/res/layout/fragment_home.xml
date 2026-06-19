@@ -37,7 +37,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:text="@string/txt_alert_blo"
-            android:textSize="22sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="?attr/colorOnSurface" />
 
@@ -60,9 +60,9 @@
         android:layout_height="wrap_content"
         android:paddingTop="4dp"
         android:paddingBottom="12dp"
-        android:textSize="13sp"
+        android:textSize="18sp"
         android:text="@string/txt_alertas_recientes"
-        android:textColor="?attr/colorOnSurface"/>
+        android:textColor="?attr/colorOnSurfaceVariant"/>
 
     <FrameLayout
         android:id="@+id/contenedor_lista_home"

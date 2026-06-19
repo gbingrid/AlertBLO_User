@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import com.google.android.material.resources.MaterialAttributes;
-import com.example.alertblo.R;
 import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONArray;
 import java.util.ArrayList;

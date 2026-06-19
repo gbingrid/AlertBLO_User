@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -38,6 +40,16 @@ public class FragmentHistorial extends Fragment{
                 if(MainActivity.adaptador != null) MainActivity.adaptador.filtrarAlerta("aviso");
             });
         }
+
+        // Configuración del botón Salir
+        ImageButton btnSalir = view.findViewById(R.id.btn_salir);
+
+        // Al hacer click, se llama al método público creado en MainActivity
+        btnSalir.setOnClickListener(v -> {
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).mostrarDialogoSalirPublico();
+            }
+        });
 
         return view;
     }

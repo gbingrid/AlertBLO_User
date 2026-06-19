@@ -4,6 +4,8 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
+        <item name="android:statusBarColor">@color/fondo</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="colorPrimary">@color/azul</item>
         <item name="colorOnPrimary">@color/blanco</item>
         <item name="colorSecondary">@color/amarillo</item>
@@ -20,6 +22,9 @@
         <item name="colorAviso">@color/naranja</item>
         <item name="colorOnAviso">@color/blanco</item>
         <item name="colorAvisoContainer">@color/naranja_claro</item>
+
+        <item name="colorOnSecondaryContainer">@color/gris</item>
+        <item name="colorSecondaryContainer">@color/amarillo</item>
 
     </style>
 
