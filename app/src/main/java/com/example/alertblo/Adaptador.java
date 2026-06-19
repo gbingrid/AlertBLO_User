@@ -9,11 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+import com.google.android.material.resources.MaterialAttributes;
+import com.example.alertblo.R;
 import androidx.recyclerview.widget.RecyclerView;
-
 import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,11 +165,16 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
 
         }
 
-        context.getTheme().resolveAttribute(android.R.attr.colorOnSurface, typedValue, true);
-        h.descripcion.setTextColor(typedValue.data);
-        context.getTheme().resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceVariant, typedValue, true);
-        h.fechaHora.setTextColor(typedValue.data);
 
+        TypedValue tvColorOnSurface = MaterialAttributes.resolve(context, com.google.android.material.R.attr.colorOnSurface);
+        if(tvColorOnSurface != null){
+            h.descripcion.setTextColor(tvColorOnSurface.data);
+        }
+
+        TypedValue tvColorOnSurfaceVariant = MaterialAttributes.resolve(context, com.google.android.material.R.attr.colorOnSurfaceVariant);
+        if(tvColorOnSurfaceVariant != null){
+            h.fechaHora.setTextColor(tvColorOnSurfaceVariant.data);
+        }
 
     }
 
