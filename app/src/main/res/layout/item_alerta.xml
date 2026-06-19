@@ -8,7 +8,8 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="2dp" >
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/blanco" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,12 +19,13 @@
 
         <ImageView
             android:id="@+id/icono_alerta"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="top"
             android:scaleType="centerInside"
             android:src="@drawable/ic_alerta_critica"
-            android:importantForAccessibility="no"/>
+            android:importantForAccessibility="no"
+            app:tint="@color/rojo" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,31 +33,34 @@
             android:orientation="vertical"
             android:layout_marginStart="12dp" >
 
-        <TextView
-            android:id="@+id/titulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            tools:text="@string/txt_titulo"/>
+            <TextView
+                android:id="@+id/titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/texto_principal"
+                tools:text="@string/txt_titulo" />
 
-        <TextView
-            android:id="@+id/descripcion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            tools:text="@string/txt_descripcion"/>
+            <TextView
+                android:id="@+id/descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/texto_secundario"
+                tools:text="@string/txt_descripcion" />
 
-        <TextView
-            android:id="@+id/fechahora"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="italic"
-            android:textSize="11sp"
-            android:layout_marginTop="12dp"
-            android:layout_gravity="end"
-            tools:text="@string/txt_fechahora"/>
+            <TextView
+                android:id="@+id/fechahora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:textSize="11sp"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="end"
+                android:textColor="@color/texto_secundario"
+                tools:text="@string/txt_fechahora"/>
 
-    </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

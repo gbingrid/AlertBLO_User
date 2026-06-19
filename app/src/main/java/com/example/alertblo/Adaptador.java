@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
@@ -125,18 +126,27 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
-
+        Context context = h.itemView.getContext();
         Alerta alerta = listaAlertas.get(position);
+
         h.titulo.setText(alerta.getTitulo());
-
-        if (alerta.getTipo() == Alerta.Tipo.CRITICA) {
-            h.icono.setImageResource(R.drawable.ic_alerta_critica);
-        } else {
-            h.icono.setImageResource(android.R.drawable.ic_dialog_info);
-        }
-
         h.descripcion.setText(alerta.getDescripcion());
         h.fechaHora.setText(alerta.getFechaHora());
+
+        // Asignar colores desde colors.xml
+        h.titulo.setTextColor(ContextCompat.getColor(context, R.color.texto_principal));
+        h.descripcion.setTextColor(ContextCompat.getColor(context, R.color.texto_secundario));
+        h.fechaHora.setTextColor(ContextCompat.getColor(context, R.color.texto_secundario));
+
+        // Asignar color e icono según el tipo de urgencia
+        if (alerta.getTipo() == Alerta.Tipo.CRITICA) {
+            h.icono.setImageResource(R.drawable.ic_alerta_critica);
+            h.icono.setColorFilter(ContextCompat.getColor(context, R.color.rojo));
+        } else {
+            h.icono.setImageResource(R.drawable.ic_notification);
+            h.icono.setColorFilter(ContextCompat.getColor(context, R.color.naranja));
+        }
+
     }
 
     @Override
