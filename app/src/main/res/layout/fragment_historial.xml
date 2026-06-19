@@ -31,8 +31,8 @@
             android:text="@string/txt_todas"
             android:textColor="@color/chip_texto_selector"
             style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipIconTint="@color/chip_selector"
-            app:chipBackgroundColor="@color/chip_texto_selector" />
+            app:chipIconTint="@color/azul"
+            app:chipBackgroundColor="@color/chip_selector" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipAlertaCritica"
@@ -41,8 +41,8 @@
             android:text="@string/txt_critica"
             android:textColor="@color/chip_texto_selector"
             style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipIconTint="@color/chip_selector"
-            app:chipBackgroundColor="@color/chip_texto_selector" />
+            app:chipIconTint="@color/azul"
+            app:chipBackgroundColor="@color/chip_selector" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipAlertaNormal"
@@ -51,8 +51,8 @@
             android:text="@string/txt_aviso"
             android:textColor="@color/chip_texto_selector"
             style="@style/Widget.MaterialComponents.Chip.Choice"
-            app:chipIconTint="@color/chip_selector"
-            app:chipBackgroundColor="@color/chip_texto_selector" />
+            app:chipIconTint="@color/azul"
+            app:chipBackgroundColor="@color/chip_selector" />
 
     </com.google.android.material.chip.ChipGroup>
 
